@@ -49,12 +49,10 @@ public class LuceneWriter {
             Directory dir = FSDirectory.open(new File(pathToIndex));
             
             //Chose the analyzer we are going to use to write documents to the index
-            //Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_44);
-            Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_40);
+            Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_44);
             
             //Create an index writer configuraiton
-//            IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_44, analyzer);
-            IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_40, analyzer);
+            IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_44, analyzer);
             
             //we are always going to overwrite the index that is currently in the directory
             iwc.setOpenMode(OpenMode.CREATE);
