@@ -39,7 +39,7 @@ public class Main {
                 
                 //now submit each park to the lucene writer to add to the index
                 
-                //System.out.println("Here is something for ya: " + park.getname() );
+                System.out.println("Here is something for ya: " + park.getname() );
             }
              
             
