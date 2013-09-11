@@ -5,11 +5,8 @@
  */
 package luceneindexer.files;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import luceneindexer.data.Park;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -48,10 +45,11 @@ public class LuceneWriter {
             //Open the directory so lucene knows how to deal with it
             Directory dir = FSDirectory.open(new File(pathToIndex));
             
-            //Chose the analyzer we are going to use to write documents to the index
+            //Chose the analyzer we are going to use to write documents to the index. We need to specify the version 
+            //of the Lucene index type we want to use
             Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_44);
             
-            //Create an index writer configuraiton
+            //Create an index writer configuration. Same thing here with the index version
             IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_44, analyzer);
             
             //we are always going to overwrite the index that is currently in the directory
@@ -85,7 +83,10 @@ public class LuceneWriter {
     public void finish(){
         System.out.println("about to close the writer");
         try {
+            //commit the document to the index
             indexWriter.commit();
+            
+            //now close it off and release the lock
             indexWriter.close();
         } catch (IOException ex) {
             System.out.println("We had a problem closing the index: " + ex.getClass() + " :: " + ex.getLocalizedMessage());

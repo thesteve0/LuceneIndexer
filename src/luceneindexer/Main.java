@@ -58,6 +58,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Threw exception " + e.getClass() + " :: " + e.getMessage());
         } finally {
+            //close out the index and release the lock on the file
             luceneWriter.finish();
         }
         
